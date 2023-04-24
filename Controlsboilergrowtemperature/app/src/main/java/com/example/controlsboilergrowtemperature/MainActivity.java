@@ -2,6 +2,7 @@ package com.example.controlsboilergrowtemperature;
 
 import static com.example.controlsboilergrowtemperature.RetrofitClient.postRetrofitInstance;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -28,8 +29,6 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private Button getDataBtn;
-    private Button postDataBtn;
 
     private TextView getDataDisplay;
     private EditText editTextTemperature;
@@ -43,10 +42,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getDataBtn = findViewById(R.id.getDataBtn);
-        postDataBtn = findViewById(R.id.postDataBtn);
+        Button getDataBtn = findViewById(R.id.getDataBtn);
+        Button postDataBtn = findViewById(R.id.postDataBtn);
         getDataDisplay = findViewById(R.id.getDataDisplay);
         editTextTemperature = findViewById(R.id.editTextTemperature);
+
 
         getDataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
                 call.enqueue(new Callback<Model>() {
                     @Override
-                    public void onResponse(Call<Model> call, Response<Model> response) {
+                    public void onResponse(@NonNull Call<Model> call, @NonNull Response<Model> response) {
                         Log.e(TAG, "onResponse: code :" + response.code());
 
                         Model model = response.body();
@@ -76,9 +76,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                             /*Log.e(TAG, "onResponse: emails :" + model.error);*/
                     }
-
                     @Override
-                    public void onFailure(Call<Model> call, Throwable t) {
+                    public void onFailure(@NonNull Call<Model> call, @NonNull Throwable t) {
                         Log.e(TAG, "onFailure: emails :" + t.getMessage());
                     }
                 });
@@ -101,15 +100,14 @@ public class MainActivity extends AppCompatActivity {
                 Call<ResponseBody> call = methods.postData(requestBody);
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                         if (response.isSuccessful()) {
                             Log.e(TAG, "onFailure: emails :" + response.code());
-                        } else {
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                         Log.e(TAG, "onFailure: emails :" + t.getMessage());// Обработка ошибки
                     }
                 });

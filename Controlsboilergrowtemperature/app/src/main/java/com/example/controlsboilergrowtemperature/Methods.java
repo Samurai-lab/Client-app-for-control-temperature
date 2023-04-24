@@ -14,7 +14,7 @@ public interface Methods {
     @GET("new.json")
     Call<Model> getAllData();
 
-    @POST("getM.php")  // Указываем путь к API
-    Call<ResponseBody> postData(@Body RequestBody requestBody);  // Определяем метод для POST-запроса
+    @POST("getM.php")
+    Call<ResponseBody> postData(@Body RequestBody requestBody);
 
 }
