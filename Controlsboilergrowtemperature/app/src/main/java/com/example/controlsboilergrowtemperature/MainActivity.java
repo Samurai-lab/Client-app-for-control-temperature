@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Bundle arguments = getIntent().getExtras();
+        String emailValue = arguments.get("email").toString();
+
         Button getDataBtn = findViewById(R.id.getDataBtn);
         Button postDataBtn = findViewById(R.id.postDataBtn);
         getDataDisplay = findViewById(R.id.getDataDisplay);
@@ -91,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject();
                 editTextString = editTextTemperature.getText().toString();
                 try {
+                    jsonObject.put("Login: ", emailValue);
                     jsonObject.put("Temperature: ", editTextString);
                 } catch (JSONException e) {
                     e.printStackTrace();

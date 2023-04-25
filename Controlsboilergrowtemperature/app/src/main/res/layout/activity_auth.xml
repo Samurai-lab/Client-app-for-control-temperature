@@ -8,10 +8,10 @@
 
 
     <TextView
-        android:id="@+id/loginTextView"
+        android:id="@+id/mailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Login"
+        android:hint="EMAIL"
         android:textSize="20sp"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -19,33 +19,33 @@
         tools:ignore="MissingConstraints"/>
 
     <EditText
-        android:id="@+id/loginEditText"
+        android:id="@+id/mailEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Wright your login"
+        android:hint="Wright your email this"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/loginTextView"
+        app:layout_constraintTop_toBottomOf="@+id/mailTextView"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/passTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Pass"
+        android:hint="PASS"
         android:textSize="20sp"
         app:layout_constraintTop_toTopOf="@+id/guideline6"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/loginEditText"
+        app:layout_constraintTop_toBottomOf="@+id/mailEditText"
         tools:ignore="MissingConstraints"/>
 
     <EditText
         android:id="@+id/passEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Wright your login"
+        android:hint="Wright your login this"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -53,12 +53,23 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/authBtn"
+        android:id="@+id/loginBtn"
+        android:text="Sing in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/passEditText"
+        app:layout_constraintBottom_toTopOf="@id/guideline5"/>
+
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="wrap_content"
+        android:text="Registration"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
         app:layout_constraintBottom_toTopOf="@id/guideline5"/>
 
     <androidx.constraintlayout.widget.Guideline
