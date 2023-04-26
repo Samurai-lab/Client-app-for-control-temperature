@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Controls boiler grow temperature</string>
+    <string name="login_text">Login</string>
+    <string name="email_text">Email</string>
+    <string name="password_text">Password</string>
+    <string name="register_text">Register</string>
+    <string name="clock_to_login">Clock to login</string>
+    <string name="click_to_register">Click to register</string>
+    <string name="logout_text">logout</string>
 </resources>

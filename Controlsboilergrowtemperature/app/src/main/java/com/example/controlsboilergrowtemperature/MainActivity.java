@@ -5,6 +5,7 @@ import static com.example.controlsboilergrowtemperature.RetrofitClient.postRetro
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +14,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,21 +36,36 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView getDataDisplay;
     private EditText editTextTemperature;
+    private Button getDataBtn, postDataBtn, logoutBtn;
+    private FirebaseAuth auth;
+    private FirebaseUser user;
 
     private String getDataDisplayHelper;
     private String getDataDisplayHelperNull;
     private String editTextString;
+
+    private void logoutIntent() {
+        Intent intent = new Intent(getApplicationContext(), Login.class);
+        startActivity(intent);
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Bundle arguments = getIntent().getExtras();
-        String emailValue = arguments.get("email").toString();
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+        if (user == null) {
+            logoutIntent();
+        } else {
 
-        Button getDataBtn = findViewById(R.id.getDataBtn);
-        Button postDataBtn = findViewById(R.id.postDataBtn);
+        }
+
+        getDataBtn = findViewById(R.id.getDataBtn);
+        postDataBtn = findViewById(R.id.postDataBtn);
+        logoutBtn = findViewById(R.id.logout);
         getDataDisplay = findViewById(R.id.getDataDisplay);
         editTextTemperature = findViewById(R.id.editTextTemperature);
 
@@ -94,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject();
                 editTextString = editTextTemperature.getText().toString();
                 try {
-                    jsonObject.put("Login: ", emailValue);
+                    jsonObject.put("Login: ", user.getEmail());
                     jsonObject.put("Temperature: ", editTextString);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -115,6 +134,14 @@ public class MainActivity extends AppCompatActivity {
                         Log.e(TAG, "onFailure: emails :" + t.getMessage());// Обработка ошибки
                     }
                 });
+            }
+        });
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                logoutIntent();
             }
         });
     }
