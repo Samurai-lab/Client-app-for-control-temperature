@@ -2,6 +2,8 @@ package com.example.controlsboilergrowtemperature;
 
 import static android.content.ContentValues.TAG;
 
+import static com.example.controlsboilergrowtemperature.RetrofitClient.postRetrofitInstance;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +23,18 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Objects;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Register extends AppCompatActivity {
 
@@ -91,6 +105,28 @@ public class Register extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
+
+                                    Methods methods = postRetrofitInstance.create(Methods.class);
+                                    JSONObject jsonObject = new JSONObject();
+                                        try {
+                                            jsonObject.put("Registration ", Objects.requireNonNull(emailEditText.getText()).toString());
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
+                                        Call<ResponseBody> call = methods.postData(requestBody);
+                                        call.enqueue(new Callback<ResponseBody>() {
+                                            @Override
+                                            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                                                if (response.isSuccessful()) {
+                                                    Log.e(TAG, "onFailure: emails :" + response.code());
+                                                }
+                                            }
+                                            @Override
+                                            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                                                Log.e(TAG, "onFailure: emails :" + t.getMessage());// Обработка ошибки
+                                            }
+                                        });
                                     Toast.makeText(Register.this, "Account created",
                                             Toast.LENGTH_SHORT).show();
                                     backToLogin();

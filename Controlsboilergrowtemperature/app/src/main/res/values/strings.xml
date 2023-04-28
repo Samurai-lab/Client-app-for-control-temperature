@@ -7,4 +7,7 @@
     <string name="clock_to_login">Clock to login</string>
     <string name="click_to_register">Click to register</string>
     <string name="logout_text">logout</string>
+    <string name="temperature_btn">Your temperature</string>
+    <string name="send_temperature_btn">Send temperature</string>
+    <string name="connecting_to_database_hint">Connecting to database..</string>
 </resources>

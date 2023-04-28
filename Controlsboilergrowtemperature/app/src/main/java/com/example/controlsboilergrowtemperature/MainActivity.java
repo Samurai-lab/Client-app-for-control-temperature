@@ -7,13 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,7 +21,9 @@ import com.google.firebase.auth.FirebaseUser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -29,6 +31,8 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,13 +40,15 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView getDataDisplay;
     private EditText editTextTemperature;
-    private Button getDataBtn, postDataBtn, logoutBtn;
+    private Button getDataBtn, postDataBtn;
+    private ImageButton logoutBtn;
     private FirebaseAuth auth;
     private FirebaseUser user;
 
     private String getDataDisplayHelper;
     private String getDataDisplayHelperNull;
     private String editTextString;
+
 
     private void logoutIntent() {
         Intent intent = new Intent(getApplicationContext(), Login.class);
@@ -59,26 +65,29 @@ public class MainActivity extends AppCompatActivity {
         user = auth.getCurrentUser();
         if (user == null) {
             logoutIntent();
-        } else {
-
         }
 
-        getDataBtn = findViewById(R.id.getDataBtn);
         postDataBtn = findViewById(R.id.postDataBtn);
         logoutBtn = findViewById(R.id.logout);
         getDataDisplay = findViewById(R.id.getDataDisplay);
         editTextTemperature = findViewById(R.id.editTextTemperature);
 
-
-        getDataBtn.setOnClickListener(new View.OnClickListener() {
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask()
+        {
             @Override
-            public void onClick(View view) {
+            public void run()
+            {
+
+                String jsonFileName = user.getEmail() + ".json";
                 Methods methods = RetrofitClient.getRetrofitInstance().create(Methods.class);
-                Call<Model> call = methods.getAllData();
+                Call<Model> call  = methods.getUser(jsonFileName);
+
 
                 call.enqueue(new Callback<Model>() {
+
                     @Override
-                    public void onResponse(@NonNull Call<Model> call, @NonNull Response<Model> response) {
+                    public void onResponse(Call<Model> call, Response<Model> response) {
                         Log.e(TAG, "onResponse: code :" + response.code());
 
                         Model model = response.body();
@@ -96,15 +105,15 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             getDataDisplay.setText(getDataDisplayHelperNull);
                         }
-                            /*Log.e(TAG, "onResponse: emails :" + model.error);*/
                     }
                     @Override
-                    public void onFailure(@NonNull Call<Model> call, @NonNull Throwable t) {
+                    public void onFailure(Call<Model> call, Throwable t) {
                         Log.e(TAG, "onFailure: emails :" + t.getMessage());
                     }
                 });
             }
-        });
+        };
+        timer.schedule(timerTask, 0, 2000);
 
         postDataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,28 +121,32 @@ public class MainActivity extends AppCompatActivity {
                 Methods methods = postRetrofitInstance.create(Methods.class);
                 JSONObject jsonObject = new JSONObject();
                 editTextString = editTextTemperature.getText().toString();
-                try {
-                    jsonObject.put("Login: ", user.getEmail());
-                    jsonObject.put("Temperature: ", editTextString);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
+                if (editTextString.matches("[-+]?\\d+")) {
+                    try {
+                        jsonObject.put(Objects.requireNonNull(user.getEmail()), editTextString);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
 
-                Call<ResponseBody> call = methods.postData(requestBody);
-                call.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                        if (response.isSuccessful()) {
-                            Log.e(TAG, "onFailure: emails :" + response.code());
+                    Call<ResponseBody> call = methods.postData(requestBody);
+                    call.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                            if (response.isSuccessful()) {
+                                Log.e(TAG, "onFailure: emails :" + response.code());
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                        Log.e(TAG, "onFailure: emails :" + t.getMessage());// Обработка ошибки
-                    }
-                });
+                        @Override
+                        public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                            Log.e(TAG, "onFailure: emails :" + t.getMessage());// Обработка ошибки
+                        }
+                    });
+                } else {
+                    Toast.makeText(MainActivity.this, "Right only number in this line", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
