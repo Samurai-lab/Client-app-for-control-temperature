@@ -16,7 +16,6 @@ public interface Methods {
     @GET("{user}")
     Call<Model> getUser(@Path("user") String userId);
 
-
     @POST("getM.php")
     Call<ResponseBody> postData(@Body RequestBody requestBody);
 

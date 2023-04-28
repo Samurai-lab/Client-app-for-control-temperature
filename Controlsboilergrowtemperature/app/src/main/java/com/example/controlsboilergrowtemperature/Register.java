@@ -38,7 +38,7 @@ import retrofit2.Response;
 
 public class Register extends AppCompatActivity {
 
-    private TextInputEditText emailEditText, passwordEditText;
+    private TextInputEditText emailEditText, passwordEditText, homeAdress;
     private Button registerBtn;
     private FirebaseAuth mAuth;
     private TextView intentTextView;
@@ -71,6 +71,7 @@ public class Register extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
         intentTextView = findViewById(R.id.loginNow);
+        homeAdress = findViewById(R.id.homeAdress);
 
         intentTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +111,7 @@ public class Register extends AppCompatActivity {
                                     JSONObject jsonObject = new JSONObject();
                                         try {
                                             jsonObject.put("Registration ", Objects.requireNonNull(emailEditText.getText()).toString());
+                                            jsonObject.put("Adress ", Objects.requireNonNull(homeAdress.getText()).toString());
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
@@ -129,6 +131,11 @@ public class Register extends AppCompatActivity {
                                         });
                                     Toast.makeText(Register.this, "Account created",
                                             Toast.LENGTH_SHORT).show();
+                                    try {
+                                        Thread.sleep(2000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
                                     backToLogin();
                                 } else {
                                     Toast.makeText(Register.this, "Authentication failed",

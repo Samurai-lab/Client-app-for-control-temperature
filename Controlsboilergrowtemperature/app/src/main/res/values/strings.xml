@@ -10,4 +10,5 @@
     <string name="temperature_btn">Your temperature</string>
     <string name="send_temperature_btn">Send temperature</string>
     <string name="connecting_to_database_hint">Connecting to database..</string>
+    <string name="adress_editText">Adress</string>
 </resources>

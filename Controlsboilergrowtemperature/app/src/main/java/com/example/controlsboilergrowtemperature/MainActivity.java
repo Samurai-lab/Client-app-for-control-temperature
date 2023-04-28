@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView getDataDisplay;
     private EditText editTextTemperature;
-    private Button getDataBtn, postDataBtn;
+    private Button postDataBtn;
     private ImageButton logoutBtn;
     private FirebaseAuth auth;
     private FirebaseUser user;
@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private String getDataDisplayHelper;
     private String getDataDisplayHelperNull;
     private String editTextString;
-
 
     private void logoutIntent() {
         Intent intent = new Intent(getApplicationContext(), Login.class);
