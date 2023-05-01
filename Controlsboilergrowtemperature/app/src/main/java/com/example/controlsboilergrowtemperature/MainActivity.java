@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     private TextView getDataDisplay;
+    private TextView priseTextView;
     private EditText editTextTemperature;
     private Button postDataBtn;
     private ImageButton logoutBtn;
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         logoutBtn = findViewById(R.id.logout);
         getDataDisplay = findViewById(R.id.getDataDisplay);
         editTextTemperature = findViewById(R.id.editTextTemperature);
+        priseTextView = findViewById(R.id.priseTextView);
 
         Timer timer = new Timer();
         TimerTask timerTask = new TimerTask()
@@ -100,6 +102,13 @@ public class MainActivity extends AppCompatActivity {
                             getDataDisplayHelper += "Мощность нагревателя: " + model.getPNagr() + "\n";
                             getDataDisplayHelper += "Работает ли помпа: " + model.getPomp() + "\n";
                             getDataDisplayHelper += "Ошибки: " + model.getError() + "\n";
+
+                            getDataDisplayHelper += "Расход газа: " + model.getRasxGaza() + "\n";
+                            getDataDisplayHelper += "Расход воздуха: " + model.getRasxVozd() + "\n";
+                            getDataDisplayHelper += "Давление воды: " + model.getDavlVod() + "\n";
+                            getDataDisplayHelper += "Давление газа: " + model.getDavlGaza() + "\n";
+
+                            priseTextView.setText((int) (Integer.parseInt(model.getRasxGaza()) * 6.51) + " rub");
                             getDataDisplayHelperNull = getDataDisplayHelper;
                         } else {
                             getDataDisplay.setText(getDataDisplayHelperNull);

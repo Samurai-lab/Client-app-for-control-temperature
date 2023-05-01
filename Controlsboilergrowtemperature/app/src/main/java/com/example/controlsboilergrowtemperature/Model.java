@@ -10,6 +10,43 @@ public class Model {
     String pomp;
     String error;
 
+    String rasxGaza;
+    String rasxVozd;
+    String davlVod;
+    String davlGaza;
+
+    public String getRasxGaza() {
+        return rasxGaza;
+    }
+
+    public void setRasxGaza(String rasxGaza) {
+        this.rasxGaza = rasxGaza;
+    }
+
+    public String getRasxVozd() {
+        return rasxVozd;
+    }
+
+    public void setRasxVozd(String rasxVozd) {
+        this.rasxVozd = rasxVozd;
+    }
+
+    public String getDavlVod() {
+        return davlVod;
+    }
+
+    public void setDavlVod(String davlVod) {
+        this.davlVod = davlVod;
+    }
+
+    public String getDavlGaza() {
+        return davlGaza;
+    }
+
+    public void setDavlGaza(String davlGaza) {
+        this.davlGaza = davlGaza;
+    }
+
     public String getTempGor() {
         return tempGor;
     }
