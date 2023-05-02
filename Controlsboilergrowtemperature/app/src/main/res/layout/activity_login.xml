@@ -55,7 +55,7 @@
         android:layout_marginBottom="5sp"
         android:layout_height="wrap_content"/>
 
-    <com.google.android.material.progressindicator.LinearProgressIndicator
+    <ProgressBar
         android:id="@+id/progressBar"
         android:visibility="gone"
         android:layout_width="match_parent"
@@ -64,10 +64,19 @@
         android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/resetNow"
+        android:text="@string/click_to_reset_password"
+        android:gravity="center"
+        android:layout_marginTop="5sp"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
         android:id="@+id/registerNow"
         android:text="@string/click_to_register"
         android:gravity="center"
-        android:layout_marginTop="5sp"
+        android:layout_marginTop="15sp"
         android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

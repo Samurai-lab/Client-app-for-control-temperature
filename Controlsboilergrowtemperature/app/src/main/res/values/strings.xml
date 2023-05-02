@@ -11,4 +11,8 @@
     <string name="send_temperature_btn">Send temperature</string>
     <string name="connecting_to_database_hint">Connecting to database..</string>
     <string name="adress_editText">Adress</string>
+    <string name="click_to_reset_password">Reset password</string>
+    <string name="reset_btn">Reset</string>
+    <string name="reset_password_text">Reset password</string>
+    <string name="back_to_login_text">Back to login</string>
 </resources>

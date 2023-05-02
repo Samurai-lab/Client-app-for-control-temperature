@@ -93,10 +93,12 @@ public class Register extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(getEmail)) {
                     Toast.makeText(Register.this, "Enter email", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
                     return;
                 }
                 if (TextUtils.isEmpty(getPassword)) {
                     Toast.makeText(Register.this, "Entre password", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
                     return;
                 }
 

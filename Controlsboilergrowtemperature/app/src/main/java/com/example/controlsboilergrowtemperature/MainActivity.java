@@ -5,6 +5,7 @@ import static com.example.controlsboilergrowtemperature.RetrofitClient.postRetro
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private String editTextString;
 
     private void logoutIntent() {
+        FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(getApplicationContext(), Login.class);
         startActivity(intent);
         finish();
@@ -74,46 +77,47 @@ public class MainActivity extends AppCompatActivity {
         priseTextView = findViewById(R.id.priseTextView);
 
         Timer timer = new Timer();
-        TimerTask timerTask = new TimerTask()
-        {
+        TimerTask timerTask = new TimerTask() {
             @Override
-            public void run()
-            {
+            public void run() {
 
                 String jsonFileName = user.getEmail() + ".json";
                 Methods methods = RetrofitClient.getRetrofitInstance().create(Methods.class);
-                Call<Model> call  = methods.getUser(jsonFileName);
-
-
+                Call<Model> call = methods.getUser(jsonFileName);
                 call.enqueue(new Callback<Model>() {
-
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onResponse(Call<Model> call, Response<Model> response) {
                         Log.e(TAG, "onResponse: code :" + response.code());
+                        if (response.code() != 404) {
+                            Model model = response.body();
+                            getDataDisplay.setText(getDataDisplayHelper);
+                            if (model.getRasxGaza() != null) {
+                                getDataDisplayHelper = "";
+                                getDataDisplayHelper += "Температура горячей воды: " + model.getTempGor() + "\n";
+                                getDataDisplayHelper += "Температура холодной воды: " + model.getTempXol() + "\n";
+                                getDataDisplayHelper += "Температура воздуха в комнате: " + model.getTempKomn() + "\n";
+                                getDataDisplayHelper += "Мощность нагревателя: " + model.getPNagr() + "\n";
+                                getDataDisplayHelper += "Работает ли помпа: " + model.getPomp() + "\n";
+                                getDataDisplayHelper += "Ошибки: " + model.getError() + "\n";
 
-                        Model model = response.body();
-
-                        getDataDisplay.setText(getDataDisplayHelper);
-                        if (model.getTempGor() != null) {
-                            getDataDisplayHelper = "";
-                            getDataDisplayHelper += "Температура горячей воды: " +  model.getTempGor() + "\n";
-                            getDataDisplayHelper += "Температура холодной воды: " +  model.getTempXol()+ "\n";
-                            getDataDisplayHelper += "Температура воздуха в комнате: " + model.getTempKomn() + "\n";
-                            getDataDisplayHelper += "Мощность нагревателя: " + model.getPNagr() + "\n";
-                            getDataDisplayHelper += "Работает ли помпа: " + model.getPomp() + "\n";
-                            getDataDisplayHelper += "Ошибки: " + model.getError() + "\n";
-
-                            getDataDisplayHelper += "Расход газа: " + model.getRasxGaza() + "\n";
-                            getDataDisplayHelper += "Расход воздуха: " + model.getRasxVozd() + "\n";
-                            getDataDisplayHelper += "Давление воды: " + model.getDavlVod() + "\n";
-                            getDataDisplayHelper += "Давление газа: " + model.getDavlGaza() + "\n";
-
-                            priseTextView.setText((int) (Integer.parseInt(model.getRasxGaza()) * 6.51) + " rub");
-                            getDataDisplayHelperNull = getDataDisplayHelper;
+                                getDataDisplayHelper += "Расход газа: " + model.getRasxGaza() + "\n";
+                                getDataDisplayHelper += "Расход воздуха: " + model.getRasxVozd() + "\n";
+                                getDataDisplayHelper += "Давление воды: " + model.getDavlVod() + "\n";
+                                getDataDisplayHelper += "Давление газа: " + model.getDavlGaza() + "\n";
+                                int gasPrice = (int) (Integer.parseInt(model.getRasxGaza()) * 6.51);
+                                priseTextView.setText(gasPrice + " rub");
+                                getDataDisplayHelperNull = getDataDisplayHelper;
+                            } else {
+                                getDataDisplay.setText(getDataDisplayHelperNull);
+                            }
                         } else {
-                            getDataDisplay.setText(getDataDisplayHelperNull);
+                            timer.cancel();
+                            Toast.makeText(MainActivity.this, "Unavailable user", Toast.LENGTH_SHORT).show();
+                            logoutIntent();
                         }
                     }
+
                     @Override
                     public void onFailure(Call<Model> call, Throwable t) {
                         Log.e(TAG, "onFailure: emails :" + t.getMessage());
@@ -122,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         timer.schedule(timerTask, 0, 2000);
+
 
         postDataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,7 +166,6 @@ public class MainActivity extends AppCompatActivity {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
                 logoutIntent();
             }
         });

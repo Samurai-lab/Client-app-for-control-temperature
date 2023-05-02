@@ -29,7 +29,7 @@ public class Login extends AppCompatActivity {
     private TextInputEditText emailEditText, passwordEditText;
     private Button loginBtn;
     private FirebaseAuth mAuth;
-    private TextView intentTextView;
+    private TextView intentTextView, resetTextView;
     ProgressBar progressBar;
 
     @Override
@@ -44,6 +44,12 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    private <T> void goToIntent(Class<T> newClass) {
+        Intent intent = new Intent(getApplicationContext(), newClass);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,13 +61,19 @@ public class Login extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
         intentTextView = findViewById(R.id.registerNow);
+        resetTextView = findViewById(R.id.resetNow);
 
         intentTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Register.class);
-                startActivity(intent);
-                finish();
+                goToIntent(Register.class);
+            }
+        });
+
+        resetTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToIntent(ResetPassword.class);
             }
         });
 
@@ -76,10 +88,12 @@ public class Login extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(getEmail)) {
                     Toast.makeText(Login.this, "Enter email", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
                     return;
                 }
                 if (TextUtils.isEmpty(getPassword)) {
                     Toast.makeText(Login.this, "Entre password", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
                     return;
                 }
 
