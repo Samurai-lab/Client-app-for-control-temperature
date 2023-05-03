@@ -20,13 +20,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ResetPassword"
-            android:exported="false"
-            android:theme="@style/Theme.Material3.Light.NoActionBar"/>
-        <activity
-            android:name=".Login"
+            android:name=".SplashScreen"
             android:exported="true"
-            android:theme="@style/Theme.Material3.Light.NoActionBar">
+            android:theme="@style/SplashStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,13 +30,22 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ResetPassword"
+            android:exported="false"
+            android:theme="@style/Theme.Material3.DayNight.NoActionBar" />
+        <activity
+            android:name=".Login"
+            android:exported="true"
+            android:theme="@style/Theme.Material3.DayNight.NoActionBar">
+        </activity>
+        <activity
             android:name=".Register"
             android:exported="false"
-            android:theme="@style/Theme.Material3.Light.NoActionBar" />
+            android:theme="@style/Theme.Material3.DayNight.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Material3.Light.NoActionBar"/>
+            android:theme="@style/Theme.Material3.DayNight.NoActionBar" />
     </application>
 
 </manifest>

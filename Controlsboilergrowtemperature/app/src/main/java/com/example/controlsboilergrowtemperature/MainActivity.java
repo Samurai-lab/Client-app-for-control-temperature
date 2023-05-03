@@ -147,13 +147,14 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                             if (response.isSuccessful()) {
-                                Log.e(TAG, "onFailure: emails :" + response.code());
+                                Log.e(TAG, "onResponse: emails :" + response.code());
+                                Toast.makeText(MainActivity.this, "Temperature sent", Toast.LENGTH_SHORT).show();
                             }
                         }
 
                         @Override
                         public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                            Log.e(TAG, "onFailure: emails :" + t.getMessage());// Обработка ошибки
+                            Log.e(TAG, "onFailure: emails :" + t.getMessage());
                         }
                     });
                 } else {
