@@ -37,7 +37,7 @@ public class Login extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
@@ -87,12 +87,12 @@ public class Login extends AppCompatActivity {
                 getPassword = String.valueOf(passwordEditText.getText());
 
                 if (TextUtils.isEmpty(getEmail)) {
-                    Toast.makeText(Login.this, "Enter email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, R.string.login_enter_email, Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     return;
                 }
                 if (TextUtils.isEmpty(getPassword)) {
-                    Toast.makeText(Login.this, "Entre password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, R.string.login_enter_password, Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     return;
                 }
@@ -103,12 +103,12 @@ public class Login extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Login.this, R.string.successful_login, Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    Toast.makeText(Login.this, "Authentication failed.",
+                                    Toast.makeText(Login.this, R.string.failed_login,
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }

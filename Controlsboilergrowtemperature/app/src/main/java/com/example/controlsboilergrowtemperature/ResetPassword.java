@@ -56,16 +56,16 @@ public class ResetPassword extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         progressBar.setVisibility(View.GONE);
-                                        Toast.makeText(ResetPassword.this, "Email sent \n If you don't see email, please, check spam", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ResetPassword.this, R.string.sent_email_reset, Toast.LENGTH_SHORT).show();
                                         backToLogin(Login.class);
                                     } else {
                                         progressBar.setVisibility(View.GONE);
-                                        Toast.makeText(ResetPassword.this, "Unavailable email", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ResetPassword.this, R.string.unsuccessful_send_email_reset, Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
                 } else {
-                    Toast.makeText(ResetPassword.this, "Pleas, repeat wright email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ResetPassword.this, R.string.repeat_write_email_reset, Toast.LENGTH_SHORT).show();
                 }
             }
         });

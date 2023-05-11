@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Контроль температуры котла</string>
+    <string name="login_text">Войти</string>
+    <string name="email_text">Почта</string>
+    <string name="password_text">Пароль</string>
+    <string name="register_text">Регистрация</string>
+    <string name="clock_to_login">Вход в аккаунт</string>
+    <string name="click_to_register">Регистрация аккаунта</string>
+    <string name="logout_text">Выйти</string>
+    <string name="temperature_btn">Ваша температура</string>
+    <string name="send_temperature_btn">Отправить температуру</string>
+    <string name="connecting_to_database_hint">Подключение к базе данных..</string>
+    <string name="adress_editText">Адрес</string>
+    <string name="click_to_reset_password">Сбросить пароль</string>
+    <string name="reset_btn">Восстановить</string>
+    <string name="reset_password_text">Восстановить пароль</string>
+    <string name="back_to_login_text">Войти в аккаунт</string>
+    <string name="hot_water">\"Температура горячей воды: \"</string>
+    <string name="cold_water">\"Температура холодной воды: \"</string>
+    <string name="air_temperature">\"Температура воздуха в комнате: \"</string>
+    <string name="heater_power">\"Мощность нагревателя: \"</string>
+    <string name="pomp_work">\"Работает ли помпа: \"</string>
+    <string name="errors">\"Ошибки: \"</string>
+    <string name="gas_consumption">\"Расход газа: \"</string>
+    <string name="air_consumption">\"Расход воздуха: \"</string>
+    <string name="water_pressure">\"Давление воды: \"</string>
+    <string name="gas_pressure">\"Давление газа: \"</string>
+    <string name="unavailable_user">Неизвестный пользователь</string>
+    <string name="temperature_send">Температура отправлена</string>
+    <string name="write_number_only">Введите только номер</string>
+    <string name="login_enter_email">Введите почту</string>
+    <string name="login_enter_password">Введите пароль</string>
+    <string name="successful_login">Авторизация успешна</string>
+    <string name="failed_login">Ошибка авторизации</string>
+    <string name="repeat_write_email_reset">Пожалуйста, повторно введите вашу почту</string>
+    <string name="sent_email_reset">Письмо отправлено \nЕсли вы не увидели письмо, пожалуйста, проверьте спам</string>
+    <string name="unsuccessful_send_email_reset">Неверная почта</string>
+</resources>

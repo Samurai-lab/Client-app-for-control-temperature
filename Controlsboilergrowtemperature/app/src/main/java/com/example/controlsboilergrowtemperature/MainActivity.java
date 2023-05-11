@@ -94,18 +94,29 @@ public class MainActivity extends AppCompatActivity {
                             getDataDisplay.setText(getDataDisplayHelper);
                             if (model.getRasxGaza() != null) {
                                 getDataDisplayHelper = "";
-                                getDataDisplayHelper += "Температура горячей воды: " + model.getTempGor() + "\n";
-                                getDataDisplayHelper += "Температура холодной воды: " + model.getTempXol() + "\n";
-                                getDataDisplayHelper += "Температура воздуха в комнате: " + model.getTempKomn() + "\n";
-                                getDataDisplayHelper += "Мощность нагревателя: " + model.getPNagr() + "\n";
-                                getDataDisplayHelper += "Работает ли помпа: " + model.getPomp() + "\n";
-                                getDataDisplayHelper += "Ошибки: " + model.getError() + "\n";
+                                getDataDisplayHelper += getString(R.string.hot_water) +
+                                        model.getTempGor() + "\n";
+                                getDataDisplayHelper += getString(R.string.cold_water) +
+                                        model.getTempXol() + "\n";
+                                getDataDisplayHelper += getString(R.string.air_temperature) +
+                                        model.getTempKomn() + "\n";
+                                getDataDisplayHelper += getString(R.string.heater_power) +
+                                        model.getPNagr() + "\n";
+                                getDataDisplayHelper += getString(R.string.pomp_work) +
+                                        model.getPomp() + "\n";
+                                getDataDisplayHelper += getString(R.string.errors) +
+                                        model.getError() + "\n";
 
-                                getDataDisplayHelper += "Расход газа: " + model.getRasxGaza() + "\n";
-                                getDataDisplayHelper += "Расход воздуха: " + model.getRasxVozd() + "\n";
-                                getDataDisplayHelper += "Давление воды: " + model.getDavlVod() + "\n";
-                                getDataDisplayHelper += "Давление газа: " + model.getDavlGaza() + "\n";
-                                int gasPrice = (int) (Integer.parseInt(model.getRasxGaza()) * 6.51);
+                                getDataDisplayHelper += getString(R.string.gas_consumption) +
+                                        model.getRasxGaza() + "\n";
+                                getDataDisplayHelper += getString(R.string.air_consumption) +
+                                        model.getRasxVozd() + "\n";
+                                getDataDisplayHelper += getString(R.string.water_pressure) +
+                                        model.getDavlVod() + "\n";
+                                getDataDisplayHelper += getString(R.string.gas_pressure) +
+                                        model.getDavlGaza() + "\n";
+                                int gasPrice = (int)
+                                        (Integer.parseInt(model.getRasxGaza()) * 19.540);
                                 priseTextView.setText(gasPrice + " rub");
                                 getDataDisplayHelperNull = getDataDisplayHelper;
                             } else {
@@ -113,7 +124,9 @@ public class MainActivity extends AppCompatActivity {
                             }
                         } else {
                             timer.cancel();
-                            Toast.makeText(MainActivity.this, "Unavailable user", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this,
+                                    R.string.unavailable_user,
+                                    Toast.LENGTH_SHORT).show();
                             logoutIntent();
                         }
                     }
@@ -148,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                             if (response.isSuccessful()) {
                                 Log.e(TAG, "onResponse: emails :" + response.code());
-                                Toast.makeText(MainActivity.this, "Temperature sent", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, R.string.temperature_send, Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -158,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    Toast.makeText(MainActivity.this, "Right only number in this line", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, R.string.write_number_only, Toast.LENGTH_SHORT).show();
                 }
 
             }

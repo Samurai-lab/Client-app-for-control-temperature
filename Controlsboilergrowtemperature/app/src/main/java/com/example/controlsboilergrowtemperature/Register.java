@@ -92,12 +92,12 @@ public class Register extends AppCompatActivity {
                 getPassword = String.valueOf(passwordEditText.getText());
 
                 if (TextUtils.isEmpty(getEmail)) {
-                    Toast.makeText(Register.this, "Enter email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, R.string.login_enter_email, Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     return;
                 }
                 if (TextUtils.isEmpty(getPassword)) {
-                    Toast.makeText(Register.this, "Entre password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, R.string.login_enter_password, Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     return;
                 }
@@ -131,7 +131,7 @@ public class Register extends AppCompatActivity {
                                                 Log.e(TAG, "onFailure: emails :" + t.getMessage());// Обработка ошибки
                                             }
                                         });
-                                    Toast.makeText(Register.this, "Account created",
+                                    Toast.makeText(Register.this, R.string.successful_login,
                                             Toast.LENGTH_SHORT).show();
                                     try {
                                         Thread.sleep(2000);
@@ -140,7 +140,7 @@ public class Register extends AppCompatActivity {
                                     }
                                     backToLogin();
                                 } else {
-                                    Toast.makeText(Register.this, "Authentication failed",
+                                    Toast.makeText(Register.this, R.string.failed_login,
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }
