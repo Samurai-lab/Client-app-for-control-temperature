@@ -81,7 +81,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:hint="@string/connecting_to_database_hint"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="17sp"

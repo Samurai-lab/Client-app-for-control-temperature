@@ -35,4 +35,7 @@
     <string name="repeat_write_email_reset">Pleas, repeat write email</string>
     <string name="sent_email_reset">Email sent \n If you don\'t see email, please, check spam</string>
     <string name="unsuccessful_send_email_reset">Unavailable email</string>
+    <string name="your_name_text">Your name</string>
+    <string name="address_not_found">Address is not found</string>
+    <string name="warning_temperature_text">Warning! Very high temperature! We used standard temperature - 60</string>
 </resources>
