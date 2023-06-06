@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                     editTextString = editTextTemperature.getText().toString();
                 } else {
                     Toast.makeText(MainActivity.this, R.string.warning_temperature_text, Toast.LENGTH_SHORT).show();
-                    editTextString = "60";
+                    editTextString = "30";
                 }
 
                 if (editTextString.matches("[-+]?\\d+")) {
@@ -205,6 +205,7 @@ public class MainActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
                     RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), jsonObject.toString());
 
                     Call<ResponseBody> call = methods.postData(requestBody);

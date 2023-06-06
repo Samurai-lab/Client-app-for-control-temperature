@@ -161,7 +161,6 @@ public class Register extends AppCompatActivity {
                         if (response.code() != 404) {
                             AnswerModel model = response.body();
                             getDataDisplayHelper = model.getAddressAnswer();
-                            System.out.println(getDataDisplayHelper);
                         }
                     }
 
@@ -170,9 +169,6 @@ public class Register extends AppCompatActivity {
                         Log.e(TAG, "onFailure: answer :" + t.getMessage());
                     }
                 });
-
-
-                System.out.println(getDataDisplayHelper);
 
                 if (Objects.equals(getDataDisplayHelper, "true")) {
                     mAuth.createUserWithEmailAndPassword(getEmail, getPassword)
