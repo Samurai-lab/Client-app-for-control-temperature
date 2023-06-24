@@ -15,16 +15,16 @@
     <string name="reset_btn">Reset</string>
     <string name="reset_password_text">Reset password</string>
     <string name="back_to_login_text">Back to login</string>
-    <string name="hot_water">\"Hot water temperature: \"</string>
-    <string name="cold_water">\"Cold water temperature: \"</string>
-    <string name="air_temperature">\"Air temperature in room: \"</string>
-    <string name="heater_power">\"Power of heather: \"</string>
-    <string name="pomp_work">\"Pomp is work: \"</string>
-    <string name="errors">\"Errors: \"</string>
-    <string name="gas_consumption">\"Gas consumption: \"</string>
-    <string name="air_consumption">\"Air consumption: \"</string>
-    <string name="water_pressure">\"Water pressure: \"</string>
-    <string name="gas_pressure">\"Gas pressure: \"</string>
+    <string name="hot_water">\Hot water temperature: \</string>
+    <string name="cold_water">\Cold water temperature: \</string>
+    <string name="air_temperature">\Air temperature in room: \</string>
+    <string name="heater_power">\Power of heather: \</string>
+    <string name="pomp_work">\Pomp is work: \</string>
+    <string name="errors">\Errors: \</string>
+    <string name="gas_consumption">\Gas consumption: \</string>
+    <string name="air_consumption">\Air consumption: \</string>
+    <string name="water_pressure">\Water pressure: \</string>
+    <string name="gas_pressure">\Gas pressure: \</string>
     <string name="unavailable_user">Unavailable user</string>
     <string name="temperature_send">Temperature sent</string>
     <string name="write_number_only">Write only number in this line</string>
@@ -37,5 +37,6 @@
     <string name="unsuccessful_send_email_reset">Unavailable email</string>
     <string name="your_name_text">Your name</string>
     <string name="address_not_found">Address is not found</string>
-    <string name="warning_temperature_text">Warning! Very high temperature! We used standard temperature - 60</string>
+    <string name="warning_temperature_text">Warning! Very high temperature! We used standard temperature - 24.
+        You can use temperature: 10 - 40</string>
 </resources>

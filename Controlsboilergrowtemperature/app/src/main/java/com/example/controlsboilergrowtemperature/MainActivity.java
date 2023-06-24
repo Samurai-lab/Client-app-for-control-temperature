@@ -192,11 +192,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Methods methods = postRetrofitInstance.create(Methods.class);
                 JSONObject jsonObject = new JSONObject();
-                if (editTextTemperature.getText().toString().length() < 3) {
+                int homeTemp = Integer.parseInt(editTextTemperature.getText().toString());
+                if (homeTemp <= 40 && homeTemp >= 10) {
                     editTextString = editTextTemperature.getText().toString();
                 } else {
                     Toast.makeText(MainActivity.this, R.string.warning_temperature_text, Toast.LENGTH_SHORT).show();
-                    editTextString = "30";
+                    editTextString = "24";
                 }
 
                 if (editTextString.matches("[-+]?\\d+")) {

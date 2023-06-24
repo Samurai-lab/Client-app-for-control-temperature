@@ -38,5 +38,6 @@
     <string name="unsuccessful_send_email_reset">Неверная почта</string>
     <string name="your_name_text">Ваше имя</string>
     <string name="address_not_found">Адрес не найден</string>
-    <string name="warning_temperature_text">Опасно! Очень высокая температура! Поставлена стандартная температура - 60</string>
+    <string name="warning_temperature_text">Опасно! Очень высокая температура! Поставлена стандартная температура - 24.
+        Допустимый диапазон температуры: 10 - 40</string>
 </resources>
